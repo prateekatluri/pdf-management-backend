@@ -49,6 +49,8 @@ async function getFiles(data) {
         userId: userId,
       }})
       const sharedFiles = await FileRep.getAllSharedFiles(userId);
+      sharedFiles.map(file => file.dataValues.isShared = true)
+      console.log(sharedFiles)
       const allFiles = [...response, ...sharedFiles];
       const updatedFiles = await Promise.all(
         allFiles.map(async (file) => {
